@@ -38,7 +38,7 @@ std::vector<std::string> Utility::ReadDict(const std::string &path) {
   } else {
     std::cout << "no such label file: " << path << ", exit the program..."
               << std::endl;
-    exit(1);
+    throw std::invalid_argument("no such label file: " + path);
   }
   return m_vec;
 }

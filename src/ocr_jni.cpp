@@ -171,10 +171,17 @@ JNICALL Java_io_github_greycode_PaddleOcr_ocr(JNIEnv *env, jobject thiz,
 
         return OcrResultUtils(env, ocr_results).getJPdObject();
     }
+    catch (std::invalid_argument &e) {
+        jclass c = env->FindClass("io/github/greycode/OcrException");
+        if (NULL == c) {
+            c = env->FindClass("java/lang/NullPointerException");
+        }
+        env->ThrowNew(c, e.what());
+    }
     catch (...) {
         throwJavaException(env);
     }
-
+    return NULL;
 }
 
 void throwJavaException(JNIEnv *env) {

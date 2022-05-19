@@ -196,7 +196,7 @@ PPOCR::ocr(std::vector<cv::String> cv_all_img_names, bool det, bool rec,
       if (!srcimg.data) {
         std::cerr << "[ERROR] image read failed! image path: "
                   << cv_all_img_names[i] << endl;
-        exit(1);
+        throw std::invalid_argument("[ERROR] image read failed! image path: " + cv_all_img_names[i]);
       }
       img_list.push_back(srcimg);
       OCRPredictResult res;
@@ -234,7 +234,7 @@ PPOCR::ocr(std::vector<cv::String> cv_all_img_names, bool det, bool rec,
       if (!srcimg.data) {
         std::cerr << "[ERROR] image read failed! image path: "
                   << cv_all_img_names[i] << endl;
-        exit(1);
+        throw std::invalid_argument("[ERROR] image read failed! image path: " + cv_all_img_names[i]);
       }
       // det
       this->det(srcimg, ocr_result, time_info_det);
